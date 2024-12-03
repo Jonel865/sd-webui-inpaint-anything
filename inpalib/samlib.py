@@ -140,7 +140,7 @@ def generate_sam_masks(
     if "sam2_" in sam_id:
         device = "cuda" if torch.cuda.is_available() else "cpu"
         torch_dtype = torch.bfloat16 if check_bfloat16_support() else torch.float16
-        with torch.inference_mode(), torch.autocast(device, dtype=torch_dtype):
+        with torch.inference_mode(): #torch.autocast(device, dtype=torch_dtype)
             sam_masks = sam_mask_generator.generate(input_image)
     else:
         sam_masks = sam_mask_generator.generate(input_image)
